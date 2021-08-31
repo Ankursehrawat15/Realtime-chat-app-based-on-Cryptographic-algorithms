@@ -2,5 +2,5 @@
 
 ## Team Members:-
   Ankur Sehrawat <br />
-  Deepen Lakra
-  
+  Deepen Lakra <br />
+  Akshat
