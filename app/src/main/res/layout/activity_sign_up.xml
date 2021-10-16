@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:id="@+id/signUp_layout"
+     android:scrollbarFadeDuration="@android:integer/config_mediumAnimTime"
+    android:overScrollMode="never"
+    android:padding="@dimen/_24sdp"
+    tools:context=".activities.SignIn">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/create_new_account"
+            android:textStyle="bold"
+            android:textSize="@dimen/_18ssp"
+            android:textColor="@color/primary_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Sign up to continue"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/secondary_text"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePic"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:background="@drawable/background_image"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"
+                android:scaleType="centerCrop"
+
+               />
+
+            <TextView
+                android:id="@+id/AddImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add image"
+                android:textStyle="bold"
+                android:textColor="@color/secondary_text"/>
+
+
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/input_NameSp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/background_input"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:hint="@string/name"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"/>
+
+        <EditText
+            android:id="@+id/input_emailSp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/background_input"
+            android:hint="@string/email"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp" />
+
+        <EditText
+            android:id="@+id/input_passwordSP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/background_input"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:hint="@string/password"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"/>
+
+        <EditText
+            android:id="@+id/input_ConfirmPasswordSp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/background_input"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:hint="@string/confirm_password"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_signUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8sdp"/>
+
+
+        <TextView
+            android:id="@+id/existingAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/already_have_an_account"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</ScrollView>
