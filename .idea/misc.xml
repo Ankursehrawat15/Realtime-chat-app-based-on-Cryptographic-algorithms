@@ -4,19 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_chat_input.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_content_bottom.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_content_top.xml" value="1.5" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_icon.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_image.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_input.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_received_messages.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/background_sent_message.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/ic_securechitchat.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/drawable/splash_layer.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_chat_log.xml" value="0.22" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_messages_list.xml" value="0.2" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_new_users_chat.xml" value="0.25" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/chat_layout_home.xml" value="0.2" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/custom_progress_dialog.xml" value="0.2" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/item_container_recieved_message.xml" value="0.33" />
+        <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/item_container_sent_message.xml" value="0.2" />
         <entry key="..\:/Users/ankur/AndroidStudioProjects/SecureChitChat/app/src/main/res/layout/user_list_item.xml" value="0.2" />
       </map>
     </option>

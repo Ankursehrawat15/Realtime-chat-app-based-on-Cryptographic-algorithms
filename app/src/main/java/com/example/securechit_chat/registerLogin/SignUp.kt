@@ -1,4 +1,4 @@
-package com.example.securechit_chat.activities
+package com.example.securechit_chat.registerLogin
 
 import android.app.Activity
 import android.app.Dialog
@@ -8,12 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import com.example.securechit_chat.R
 import com.example.securechit_chat.databinding.ActivitySignUpBinding
+import com.example.securechit_chat.models.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -201,7 +199,3 @@ class SignUp : AppCompatActivity() {
 }
 
 
- class User(val name:String , val profilePic : String , val Password: String , val email: String , val uid :String){
-
-     constructor() : this("","","","","")
- }

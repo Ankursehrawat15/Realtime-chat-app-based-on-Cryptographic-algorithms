@@ -6,7 +6,7 @@
     android:animateLayoutChanges="true"
     android:background="@color/primary"
     android:layout_height="match_parent"
-    tools:context=".activities.NewUsersChat">
+    tools:context=".messages.NewUsersChat">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageBack"

@@ -9,7 +9,7 @@
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
-    tools:context=".activities.SignIn">
+    tools:context=".registerLogin.SignIn">
 
 
   <LinearLayout

@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/primary"
-    tools:context=".activities.MessagesList">
+    tools:context=".messages.MessagesList">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/background_icon"
+        android:background="@drawable/background_image"
         android:scaleType="centerCrop"
         app:civ_border_color="#FF000000"
         app:civ_border_width="1dp"
@@ -56,7 +56,7 @@
         android:id="@+id/newUserMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/primary_dark"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_add"
          app:tint = "@color/white"
@@ -75,13 +75,12 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/newUserRV"
+            android:id="@+id/currentChatRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="@dimen/_20sdp"
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:overScrollMode="never"/>
 

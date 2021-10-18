@@ -10,17 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SecureChitChat">
         <activity
-            android:name=".activities.NewUsersChat"
+            android:name=".messages.ChatLogActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.MessagesList"
+            android:name=".messages.NewUsersChat"
             android:exported="true" />
         <activity
-            android:name=".activities.SignIn"
+            android:name=".messages.MessagesList"
+            android:exported="true" />
+        <activity
+            android:name=".registerLogin.SignIn"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activities.SignUp"
+            android:name=".registerLogin.SignUp"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity

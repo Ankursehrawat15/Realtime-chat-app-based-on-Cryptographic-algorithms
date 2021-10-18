@@ -3,8 +3,8 @@ package com.example.securechit_chat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.securechit_chat.activities.MessagesList
-import com.example.securechit_chat.activities.SignIn
+import com.example.securechit_chat.messages.MessagesList
+import com.example.securechit_chat.registerLogin.SignIn
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreen : AppCompatActivity() {
