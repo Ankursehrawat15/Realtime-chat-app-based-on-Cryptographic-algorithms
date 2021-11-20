@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.securechit_chat.Aes
 import com.example.securechit_chat.R
 import com.example.securechit_chat.databinding.ActivityChatLogBinding
 import com.example.securechit_chat.models.ChatMessage
 import com.example.securechit_chat.models.User
+import com.example.securechit_chat.registerLogin.SignUp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -24,10 +26,11 @@ class ChatLogActivity : AppCompatActivity() {
 
     // view binding
     private lateinit var binding : ActivityChatLogBinding
-
+    private val decrypter : Aes = Aes()
     // adapter for recyclerView
      val adapter = GroupAdapter<ViewHolder>()
      var toUser : User? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,7 @@ class ChatLogActivity : AppCompatActivity() {
         toUser = intent.getParcelableExtra<User>(NewUsersChat.USER_KEY)
         // setting userName with whom chat is going on
         if(toUser != null) {
-            binding.textPerson.text = toUser!!.name
+            binding.textPerson.text = decrypter.decrypt(toUser!!.name , SignUp.key)
 
         }
 
@@ -62,6 +65,9 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
     private fun listenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
@@ -155,11 +161,16 @@ class ChatLogActivity : AppCompatActivity() {
 
 // for recieving messages
 class ChatFromItem(val text: String , val user : User): Item<ViewHolder>(){
+
+    private val decrypter: Aes = Aes()
+
     override fun bind(viewHolder: ViewHolder, position: Int) {
          viewHolder.itemView.findViewById<TextView>(R.id.textMessageRecieved).text = text
         val uri = user.profilePic
         val imageView = viewHolder.itemView.findViewById<ImageView>(R.id.profilePicReciver)
-        Picasso.get().load(uri).into(imageView)
+
+        Picasso.get().load(decrypter.decrypt(uri , SignUp.key)).into(imageView)
+
     }
 
     override fun getLayout(): Int {

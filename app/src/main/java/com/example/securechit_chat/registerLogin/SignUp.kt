@@ -2,13 +2,16 @@ package com.example.securechit_chat.registerLogin
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.Toast
+import com.example.securechit_chat.Aes
 import com.example.securechit_chat.R
 import com.example.securechit_chat.databinding.ActivitySignUpBinding
 import com.example.securechit_chat.models.User
@@ -26,18 +29,24 @@ class SignUp : AppCompatActivity() {
     private  val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var progressDialog : Dialog
 
+
+    companion object{
+        val key = "3KHjnc4IZHfFN5BxFzxfHHxTDLy1"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        // switching to signIn
+        // switching to signIn if have account
         binding.existingAccount.setOnClickListener {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
             finish()
         }
+
          // loading animation
         progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.custom_progress_dialog)
@@ -94,6 +103,7 @@ class SignUp : AppCompatActivity() {
 
     // for image selection from device
      private var selectedPhoto: Uri? = null
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
@@ -126,6 +136,7 @@ class SignUp : AppCompatActivity() {
     }
       // uploading the image to storage on firebase
     private fun uploadImageToFirebase() {
+
        val filename = UUID.randomUUID().toString()
       val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
@@ -153,16 +164,33 @@ class SignUp : AppCompatActivity() {
 
 
     // saving the users meta deta at backend
-    private fun saveUserInfoFireBase(profileImageUrl : String) {
+    private fun saveUserInfoFireBase( profileImageUrl : String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
       val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-           val name = binding.inputNameSp.text.toString()
-           val email = binding.inputEmailSp.text.toString()
+           var name = binding.inputNameSp.text.toString()
+           var email = binding.inputEmailSp.text.toString()
+           var imageLink = profileImageUrl
+           var passwordUser = binding.inputPasswordSP.text.toString()
 
-           val user = User(name, profileImageUrl , binding.inputPasswordSP.text.toString(), email , uid)
+             // Meta deta securing.
+             val encrypter : Aes = Aes()
+
+             name = encrypter.encrypt(name , key)
+             name = name.subSequence(0 , name.length-1) as String
+             email = encrypter.encrypt(email , key)
+             email = email.subSequence(0 , email.length-1) as String
+             imageLink= encrypter.encrypt(imageLink , key)
+             imageLink = imageLink.subSequence(0 , imageLink.length-1) as String
+             passwordUser = encrypter.encrypt(passwordUser , key)
+             passwordUser = passwordUser.subSequence(0 , passwordUser.length-1) as String
+
+
+           val user = User(name, imageLink , passwordUser, email , uid)
+           // Encryption krrna hae yhan prr
            ref.setValue(user)
                .addOnSuccessListener {
                    progressDialog.dismiss()
+                   SaveData(name , imageLink)
                    emailVerification()
 
                }
@@ -173,6 +201,16 @@ class SignUp : AppCompatActivity() {
 
 
 
+    }
+
+    private fun SaveData(userName : String , url : String) {
+         val sharedPrefrences : SharedPreferences = getSharedPreferences("Meta-Deta" , Context.MODE_PRIVATE )
+        val editor : SharedPreferences.Editor = sharedPrefrences.edit()
+
+        editor.apply {
+            putString("userName:${auth.currentUser?.uid}" , userName)
+            putString("imageUrl:${auth.currentUser?.uid}" , url)
+        }.apply()
     }
 
     private fun emailVerification() {

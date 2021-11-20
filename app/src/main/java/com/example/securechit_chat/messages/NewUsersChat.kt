@@ -3,13 +3,17 @@ package com.example.securechit_chat.messages
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.example.securechit_chat.Aes
 import com.example.securechit_chat.R
 import com.example.securechit_chat.models.User
 import com.example.securechit_chat.databinding.ActivityNewUsersChatBinding
+import com.example.securechit_chat.registerLogin.SignUp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -93,13 +97,16 @@ class NewUsersChat : AppCompatActivity() {
 }
     // this class binds with the item loads image from web using picasso
 class UserList(val user: User): Item<ViewHolder>(){
-
+        private val decrypter : Aes = Aes()
+        private val uid  = FirebaseAuth.getInstance().uid.toString()
     // will be called in our list for each user object later on...
     override fun bind(viewHolder: ViewHolder, position: Int) {
-         viewHolder.itemView.findViewById<TextView>(R.id.userNameTV).text = user.name
-        viewHolder.itemView.findViewById<TextView>(R.id.usersEmail).text = user.email
+                 // decryption happening in here
+        viewHolder.itemView.findViewById<TextView>(R.id.userNameTV).text = decrypter.decrypt(user.name , SignUp.key)
+        viewHolder.itemView.findViewById<TextView>(R.id.usersEmail).text = decrypter.decrypt(user.email , SignUp.key)
+        val imageView = viewHolder.itemView.findViewById<ImageView>(R.id.profilePicIV)
+         Picasso.get().load(decrypter.decrypt(user.profilePic , SignUp.key)).into(imageView)
 
-        Picasso.get().load(user.profilePic).into(viewHolder.itemView.findViewById<ImageView>(R.id.profilePicIV))
     }
 
     override fun getLayout(): Int {

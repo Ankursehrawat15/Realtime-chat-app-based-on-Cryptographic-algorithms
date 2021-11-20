@@ -1,21 +1,22 @@
 package com.example.securechit_chat.messages
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.securechit_chat.Aes
 import com.example.securechit_chat.R
 import com.example.securechit_chat.registerLogin.SignIn
 import com.example.securechit_chat.databinding.ActivityMessagesListBinding
 import com.example.securechit_chat.models.ChatMessage
 import com.example.securechit_chat.models.User
+import com.example.securechit_chat.registerLogin.SignUp
 import com.example.securechit_chat.views.LatestMessageRow
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -36,13 +37,21 @@ class MessagesList : AppCompatActivity() {
     // view binding
     private lateinit var binding : ActivityMessagesListBinding
     private lateinit var auth : FirebaseAuth
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMessagesListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
 
+
+        auth = FirebaseAuth.getInstance()
+        loadCurrentUserData()
         binding.currentChatRV.adapter = adapter
         binding.currentChatRV.addItemDecoration(DividerItemDecoration(this , DividerItemDecoration.VERTICAL))
 
@@ -53,7 +62,7 @@ class MessagesList : AppCompatActivity() {
             val intent = Intent(this , ChatLogActivity::class.java)
 
             val row = item as LatestMessageRow
-           intent.putExtra(NewUsersChat.USER_KEY,row.chatPartnerUser )
+            intent.putExtra(NewUsersChat.USER_KEY,row.chatPartnerUser )
             startActivity(intent)
         }
 
@@ -85,6 +94,25 @@ class MessagesList : AppCompatActivity() {
 
     }
 
+    private fun loadCurrentUserData() {
+        val decrypter : Aes = Aes()
+        val sharedPrefrences : SharedPreferences = getSharedPreferences("Meta-Deta" , Context.MODE_PRIVATE )
+        var userName : String? = sharedPrefrences.getString("userName:${auth.currentUser?.uid}" , null)
+        var userImageUrl : String? = sharedPrefrences.getString("imageUrl:${auth.currentUser?.uid}" , null)
+        if(userImageUrl != null) {
+            userImageUrl = decrypter.decrypt(userImageUrl, SignUp.key)
+        }
+
+
+        if(userName != null){
+           userName =  decrypter.decrypt(userName , SignUp.key)
+            binding.textView.text = userName
+        }
+
+
+        Picasso.get().load(userImageUrl).into(binding.profilePic)
+    }
+
     val latestMessagesMap = HashMap<String , ChatMessage>()
 
     private fun ListenForLatestMessages() {
@@ -97,11 +125,6 @@ class MessagesList : AppCompatActivity() {
 
                 latestMessagesMap[snapshot.key!!] = chatMessage
                 refreshRecyclerViewMessages()
-
-
-
-
-
 
             }
 
@@ -164,15 +187,15 @@ class MessagesList : AppCompatActivity() {
     private fun ShowAlertDialog() : AlertDialog.Builder {
         val logoutDialog = AlertDialog.Builder(this).setTitle("Logout").setMessage("Do you want to logout ?")
             .setIcon(R.drawable.ic_securechitchat)
-            .setPositiveButton("Yes") { _, _ ->
+            .setPositiveButton("No") { dialogInterface, _ ->
+                dialogInterface.cancel()
+
+            }.setNegativeButton("Yes") {  _, i ->
                 auth.signOut()
                 val intent : Intent = Intent(this, SignIn::class.java)
                 startActivity(intent)
                 finish()
 
-            }.setNegativeButton("No") { dialogInterface , i ->
-
-                dialogInterface.cancel()
             }
 
         return logoutDialog
