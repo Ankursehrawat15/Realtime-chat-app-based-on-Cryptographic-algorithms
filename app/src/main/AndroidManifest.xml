@@ -4,14 +4,32 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_securechitchat"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_securechitchat"
         android:supportsRtl="true"
         android:theme="@style/Theme.SecureChitChat">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".messages.ChatLogActivity"
+            android:exported="true" />
+        <activity
+            android:name=".messages.NewUsersChat"
+            android:exported="true" />
+        <activity
+            android:name=".messages.MessagesList"
+            android:exported="true" />
+        <activity
+            android:name=".registerLogin.SignIn"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".registerLogin.SignUp"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
